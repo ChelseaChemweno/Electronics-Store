@@ -14,7 +14,6 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Use prepared statement
     $sql = "SELECT * FROM users WHERE email = ?";
 
     $stmt = mysqli_prepare($conn, $sql);
@@ -27,13 +26,10 @@ if (isset($_POST['login'])) {
 
     $user = mysqli_fetch_assoc($result);
 
-
     if ($user && password_verify($password, $user['password_hash'])) {
 
         $_SESSION['user_id'] = $user['id'];
-
         $_SESSION['full_name'] = $user['full_name'];
-
         $_SESSION['role'] = $user['role'];
 
         echo "Login successful!";
@@ -43,27 +39,54 @@ if (isset($_POST['login'])) {
         echo "Invalid email or password!";
 
     }
-
 }
 
 ?>
 
-<h2>Login</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
 
-<form method="POST" action="/ElectronicShop/account/login.php">
+<body  class="auth-page">
 
-    Email:
+<div class="auth-container">
 
-    <input type="email" name="email" required>
+   
 
-    <br><br>
+    <div class="auth-boxes">
 
-    Password:
+        <!-- LOGIN BOX -->
+        <div class="auth-box">
 
-    <input type="password" name="password" required>
+            <h1>Login</h1>
 
-    <br><br>
+            <p>Access your account to explore and manage your orders.</p>
 
-    <button type="submit" name="login">Login</button>
+            <form method="POST" action="login.php">
 
-</form>
+                <label>Email</label>
+                <input type="email" name="email" placeholder="you@example.com" required>
+
+                <label>Password</label>
+                <input type="password" name="password" placeholder="********" required>
+
+                <button type="submit" name="login">Login</button>
+
+            </form>
+
+            <div class="switch-link">
+                Don't have an account?
+                <a href="register.php">Sign Up</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
