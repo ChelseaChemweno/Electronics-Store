@@ -17,8 +17,7 @@ if (!defined('BASE_URL')) {
 
         <a href="<?php echo BASE_URL; ?>/shop/">New Arrivals</a>
 
-        <a href="<?php echo BASE_URL; ?>/shop/">Categories</a>
-
+        
         <a href="<?php echo BASE_URL; ?>/shop/">Deals</a>
 
     </nav>
