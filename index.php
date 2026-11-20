@@ -46,15 +46,7 @@
         <div class="hero-actions">
             <a href="shop/" class="shop-btn">SHOP NOW →</a>
 
-            <!-- Benefits -->
-            <section class="benefits">
-
-                <div>✓ 100% Original</div>
-                <div>↩ Easy Returns</div>
-                <div>🚚 Free Shipping</div>
-                <div>🔒 Secure Checkout</div>
-
-            </section>
+            
         </div>
     </div>
 
@@ -78,37 +70,37 @@
     <div class="category-container">
 
         <div class="category">
-            <img src="assets/img/iphone.jpg" alt="iPhone">
+            <img src="assets/img/iphone-category-landing-page.jpg" alt="" srcset="">
             <h3>iPhone</h3>
             <a href="shop/">Shop Now →</a>
         </div>
 
         <div class="category">
-            <img src="assets/img/samsung.jpg" alt="Samsung">
+            <img src="assets/img/samsung-category-landing-page.jpg" alt="Samsung">
             <h3>Samsung</h3>
             <a href="shop/">Shop Now →</a>
         </div>
 
         <div class="category">
-            <img src="assets/img/laptop.jpg" alt="Laptops">
+            <img src="assets/img/laptop-category-landing-page.png" alt="Laptops">
             <h3>HP Laptops</h3>
             <a href="shop/">Shop Now →</a>
         </div>
 
         <div class="category">
-            <img src="assets/img/headphones.jpg" alt="Headphones">
+            <img src="assets/img/headphone-category-landing-page.png" alt="Headphones">
             <h3>Audio</h3>
             <a href="shop/">Shop Now →</a>
         </div>
 
         <div class="category">
-            <img src="assets/img/accessories.jpg" alt="Accessories">
+            <img src="assets/img/Router-category-landing-page.jpg" alt="Accessories">
             <h3>Accessories</h3>
             <a href="shop/">Shop Now →</a>
         </div>
 
         <div class="category">
-            <img src="assets/img/smartwatch.jpg" alt="Smartwatch">
+            <img src="assets/img/smart-watch-category-landing-page.jpg" alt="Smartwatch">
             <h3>Smartwatches</h3>
             <a href="shop/">Shop Now →</a>
         </div>
