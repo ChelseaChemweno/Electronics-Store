@@ -1,5 +1,11 @@
+
 <?php
+
 $conn = mysqli_connect("localhost", "root", "", "electronic_shop");
+
+if (!$conn) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
 
 if (isset($_POST['register'])) {
 
@@ -9,23 +15,79 @@ if (isset($_POST['register'])) {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO users (full_name, email, phone, password_hash)
-            VALUES ('$full_name', '$email', '$phone', '$password')";
+            VALUES (?, ?, ?, ?)";
 
-    if (mysqli_query($conn, $sql)) {
-        echo "Registration successful!";
+    $stmt = mysqli_prepare($conn, $sql);
+
+    mysqli_stmt_bind_param($stmt, "ssss", $full_name, $email, $phone, $password);
+
+    if (mysqli_stmt_execute($stmt)) {
+
+        header("Location: login.php");
+        exit();
+
     } else {
+
         echo "Registration failed!";
+
     }
 }
+
 ?>
 
-<h2>Register</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
 
-<form method="POST">
-    Full Name: <input type="text" name="full_name" required><br><br>
-    Email: <input type="email" name="email" required><br><br>
-    Phone: <input type="text" name="phone"><br><br>
-    Password: <input type="password" name="password" required><br><br>
+<body class="auth-page">
 
-    <button type="submit" name="register">Register</button>
-</form>
+<div class="auth-container">
+
+  
+
+    <div class="auth-boxes">
+
+        <!-- LOGIN PROMPT BOX -->
+        
+
+        <!-- REGISTRATION BOX -->
+        <div class="auth-box">
+
+            <h1>Create Account</h1>
+
+            <p>Sign up to access exclusive collections and manage your orders.</p>
+
+            <form method="POST" action="register.php">
+
+                <label>Full Name</label>
+                <input type="text" name="full_name" placeholder="Your Name" required>
+
+                <label>Email</label>
+                <input type="email" name="email" placeholder="you@example.com" required>
+
+                <label>Phone</label>
+                <input type="text" name="phone" placeholder="Your Phone Number">
+
+                <label>Password</label>
+                <input type="password" name="password" placeholder="********" required>
+
+                <button type="submit" name="register">Sign Up</button>
+
+            </form>
+
+            <div class="switch-link">
+                Already have an account?
+                <a href="login.php">Login</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
