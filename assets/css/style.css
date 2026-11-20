@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f3ef;
+    color: #222;
+    overflow-x: clip;               /* no sideways scrollbar from products flying wide */
+}
+
+/* Navigation */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 6%;
+    background: white;
+}
+
+header h2 {
+    letter-spacing: 2px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 10px;
+    font-size: 14px;
+}
+
+.icons a {
+    text-decoration: none;
+    font-size: 20px;
+    margin-left: 12px;
+    color: black;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 65px 6%;
+    background: #eeece7;
+    min-height: 420px;
+    position: relative;
+    z-index: 1;                     /* products can drift over neighbouring sections */
+}
+
+.hero-text {
+    width: 45%;
+    position: relative;
+    z-index: 2;                     /* text always stays readable above the products */
+}
+
+.small-title {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #a68b55;
+    margin-bottom: 20px;
+}
+
+.hero-text h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-text h1 span {
+    color: #b49a6a;
+    font-style: italic;
+}
+
+.hero-text p {
+    line-height: 1.7;
+}
+
+.shop-btn {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 14px 28px;
+    background: #b49a6a;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+}
+
+/* Hero Image - Infinite Z-Axis Zoom Loop */
+.hero-image {
+    width: 50%;
+}
+
+.zoom-stage {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    perspective: 1200px;            /* depth of the 3D scene */
+    perspective-origin: 50% 50%;
+    overflow: visible;              /* borderless: products are never clipped by a box */
+    pointer-events: none;
+}
+
+.zoom-item {
+    --duration: 12s;                /* full loop time (3s per product) */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 55%;
+    max-height: 90%;
+    object-fit: contain;
+    opacity: 0;
+    will-change: transform, opacity, filter;
+    animation: zoomLoop var(--duration) linear infinite;
+    animation-delay: calc(var(--i) * (var(--duration) / -4));
+}
+
+/* Far away: faint and blurred. Closer: fully sharp. Passing camera: fades out. */
+@keyframes zoomLoop {
+    0% {
+        transform: translate(-50%, -50%) translate3d(var(--x), var(--y), -2200px);
+        opacity: 0;
+        filter: blur(14px) drop-shadow(0 25px 30px rgba(0, 0, 0, 0));
+    }
+    15% {
+        opacity: 0.35;
+        filter: blur(9px) drop-shadow(0 25px 30px rgba(0, 0, 0, 0.08));
+    }
+    40% {
+        transform: translate(-50%, -50%) translate3d(var(--x), var(--y), -300px);
+        opacity: 1;                 /* fully visible and sharp from here */
+        filter: blur(0) drop-shadow(0 25px 30px rgba(0, 0, 0, 0.25));
+    }
+    70% {
+        transform: translate(-50%, -50%) translate3d(var(--x), var(--y), 250px);
+        opacity: 1;
+        filter: blur(0) drop-shadow(0 25px 30px rgba(0, 0, 0, 0.25));
+    }
+    100% {
+        transform: translate(-50%, -50%) translate3d(var(--x), var(--y), 800px);
+        opacity: 0;                 /* flies past the camera and fades */
+        filter: blur(3px) drop-shadow(0 25px 30px rgba(0, 0, 0, 0));
+    }
+}
+
+/* Respect users who prefer reduced motion: show a static product */
+@media (prefers-reduced-motion: reduce) {
+    .zoom-item {
+        animation: none;
+        opacity: 0;
+    }
+    .zoom-item:first-child {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Hero actions: button + benefits side by side */
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 25px;
+}
+
+.hero-actions .shop-btn {
+    margin-top: 0;
+    white-space: nowrap;
+}
+
+/* Benefits (no background, sits beside the button) */
+.benefits {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 8px 22px;
+    padding: 0;
+    background: none;
+    font-size: 13px;
+    color: #444;
+    text-align: left;
+}
+
+.benefits div {
+    white-space: nowrap;
+}
+
+/* Categories */
+.categories {
+    padding: 45px 6%;
+}
+
+.categories h2 {
+    margin-bottom: 25px;
+}
+
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+}
+
+.category {
+    background: white;
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.category img {
+    width: 100%;
+    height: 130px;
+    object-fit: contain;
+}
+
+.category h3 {
+    font-size: 15px;
+    margin: 12px 0;
+}
+
+.category a {
+    text-decoration: none;
+    color: #555;
+    font-size: 12px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    header {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text,
+    .hero-image {
+        width: 100%;
+    }
+
+    .hero-text h1 {
+        font-size: 35px;
+    }
+
+    .zoom-stage {
+        height: 300px;
+    }
+
+    .zoom-item {
+        width: 70%;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .benefits {
+        justify-content: center;
+    }
+
+    .category-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
