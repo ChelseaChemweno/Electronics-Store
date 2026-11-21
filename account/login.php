@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -32,7 +31,12 @@ if (isset($_POST['login'])) {
         $_SESSION['full_name'] = $user['full_name'];
         $_SESSION['role'] = $user['role'];
 
-        echo "Login successful!";
+        if ($user['role'] === 'admin') {
+            header("Location: ../admin/index.php");
+        } else {
+            header("Location: ../index.php");
+        }
+        exit();
 
     } else {
 
@@ -58,7 +62,7 @@ if (isset($_POST['login'])) {
 
     <div class="auth-boxes">
 
-        <!-- LOGIN BOX -->
+
         <div class="auth-box">
 
             <h1>Login</h1>
