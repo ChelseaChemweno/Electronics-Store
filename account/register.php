@@ -50,10 +50,6 @@ if (isset($_POST['register'])) {
 
     <div class="auth-boxes">
 
-        <!-- LOGIN PROMPT BOX -->
-        
-
-        <!-- REGISTRATION BOX -->
         <div class="auth-box">
 
             <h1>Create Account</h1>
